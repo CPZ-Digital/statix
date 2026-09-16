@@ -7,6 +7,12 @@
 <meta name="apple-mobile-web-app-title" content="Statix">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon-192.png">
+<script>
+  // registra o SW imediato, antes de qualquer módulo do app — precisa rodar mesmo se o usuário
+  // ainda não tem licença (gate é só visual) e mesmo se algum módulo mais pesado (app-championship.js)
+  // der erro depois; SW é exigência do Chrome pra liberar "instalar app" e não pode depender disso.
+  if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
+</script>
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

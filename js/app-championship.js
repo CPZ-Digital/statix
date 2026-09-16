@@ -1694,7 +1694,4 @@
   }
 
   if(champCode()) switchView('champ');
-
-  if('serviceWorker' in navigator){
-    navigator.serviceWorker.register('sw.js').catch(()=>{}); // ponytail: falha silenciosa fora do GitHub Pages (ex. preview do artifact), onde sw.js/manifest não existem
-  }
+  // registro do SW foi movido pro <head> do index.html (rodar antes de tudo, ver comentário lá)
