@@ -669,8 +669,9 @@
       msg.textContent = 'Adicionando…';
       btn.disabled = true;
       try{
-        const pinHash = await sha256(pin);
-        await sbWrite('teams', { method:'POST', body: JSON.stringify({ championship_id: championship.id, name, pin: pinHash }) }, 'Time adicionado', true);
+        // Hash (bcrypt, com sal) agora acontece no servidor via trigger --
+        // antes era SHA-256 sem sal calculado aqui no client (auditoria 2026-09-16).
+        await sbWrite('teams', { method:'POST', body: JSON.stringify({ championship_id: championship.id, name, pin }) }, 'Time adicionado', true);
         renderChampOverall(championship, true);
       }catch(e){ msg.textContent = 'Erro ao adicionar — talvez já exista um time com esse nome.'; btn.disabled = false; }
     });
